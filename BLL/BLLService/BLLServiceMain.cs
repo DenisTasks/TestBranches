@@ -184,9 +184,9 @@ namespace BLL.BLLService
         public void AddAppointment(AppointmentDTO appointment, int id)
         {
             var appointmentItem = Mapper.Map<AppointmentDTO, Appointment>(appointment);
-            appointmentItem.OrganizerId = id;
             appointmentItem.Organizer = _users.FindById(id);
             appointmentItem.Location = _locations.FindById(appointmentItem.LocationId);
+            appointmentItem.OrganizerId = id;
             appointmentItem.Users = new List<User>();
             var convert = Mapper.Map<IEnumerable<UserDTO>, IEnumerable<User>>(appointment.Users);
             foreach (var item in convert)
