@@ -1,0 +1,66 @@
+﻿<Window x:Class="TestWpf.Appointments.AboutAppWindow"
+        x:Name ="PrintAppointmentWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TestWpf"
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d"
+        DataContext="{Binding AboutAppWindow, 
+                              Source={StaticResource Locator}}"
+        Title="AboutAppWindow" Height="500" Width="500">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Column="0" Grid.Row="1" Content="Subject"/>
+        <Label Grid.Column="0" Grid.Row="2" Content="Location"/>
+        <Label Grid.Column="0" Grid.Row="3" Content="Start Time"/>
+        <Label Grid.Column="0" Grid.Row="4" Content="End Time"/>
+        <Label Grid.Column="0" Grid.Row="6" Content="Users"/>
+
+        <Label Grid.Column="1" Grid.Row="1" 
+               Content="{Binding Appointment.Subject}"
+               HorizontalContentAlignment="Center"/>
+        <Label Grid.Column="1" Grid.Row="2" 
+               Content="{Binding Location.Room}"
+               HorizontalContentAlignment="Center"/>
+        <Label Grid.Column="1" Grid.Row="3" 
+               Content="{Binding Appointment.BeginningDate}"
+               HorizontalContentAlignment="Center"/>
+        <Label Grid.Column="1" Grid.Row="4" 
+               Content="{Binding Appointment.EndingDate}"
+               HorizontalContentAlignment="Center"/>
+
+        <ListView Grid.Column="1"
+                  Grid.Row="6"
+                  ItemsSource="{Binding Appointment.Users}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <DockPanel>
+                        <TextBlock Text="{Binding Name}"
+                                   VerticalAlignment="Center"/>
+                    </DockPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button Grid.Column="3" Grid.Row="9" 
+                Command="{Binding PrintAppointmentCommand, Mode=OneTime}" 
+                CommandParameter="{Binding ElementName=PrintAppointmentWindow}"
+                Content="Print appointment" />
+    </Grid>
+</Window>

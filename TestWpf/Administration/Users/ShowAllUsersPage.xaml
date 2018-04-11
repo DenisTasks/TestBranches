@@ -1,0 +1,84 @@
+﻿<Page x:Class="TestWpf.Administration.Users.ShowAllUsersPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TestWpf.Administration.Users"
+      DataContext="{Binding AllUsersPage, Source={StaticResource Locator}}"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="1200"
+      Title="ShowAllUsersPage">
+
+    <Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <ListView Name="UserList"
+                  Grid.ColumnSpan="3"
+                  Grid.Row="0"
+                  MaxHeight="480"
+                  SelectionMode="Single"
+                  ItemsSource="{Binding Users}" Margin="0,-1,0,1" >
+                <ListView.GroupStyle>
+                    <GroupStyle>
+                        <GroupStyle.HeaderTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="Coral" BorderThickness="2">
+                                    <TextBlock Text="{Binding Path=Name}" FontWeight="Bold"/>
+                                </Border>
+                            </DataTemplate>
+                        </GroupStyle.HeaderTemplate>
+                    </GroupStyle>
+                </ListView.GroupStyle>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Id" DisplayMemberBinding="{Binding UserId}" Width="70"/>
+                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="300"/>
+                        <GridViewColumn Header="UserName" DisplayMemberBinding="{Binding UserName}" Width="300"/>
+                        <GridViewColumn Header="Activity" DisplayMemberBinding="{Binding IsActive}" Width="100"/>
+                        <GridViewColumn Header="Roles Count" DisplayMemberBinding="{Binding Roles.Count}" Width="150"/>
+                        <GridViewColumn Header="Group Count" DisplayMemberBinding="{Binding Groups.Count}" Width="150"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+            <Button Grid.Column="1"
+                Grid.Row="2"
+                Command="{Binding AddUserCommand}"
+                VerticalAlignment="Center"
+                Margin="10, 0"
+                Padding="10, 0">Add user</Button>
+
+            <Button Grid.Column="0"
+                Grid.Row="2"
+                Command="{Binding EditUserCommand}"
+                CommandParameter="{Binding SelectedItem, ElementName=UserList}"
+                VerticalAlignment="Center"
+                Margin="10, 0"
+                Padding="10, 0">Edit user</Button>
+
+            <Button Grid.Column="2"
+                Grid.Row="2"
+                Command="{Binding DeactivateUserCommand}"
+                CommandParameter="{Binding SelectedItem, ElementName=UserList}"
+                VerticalAlignment="Center"
+                Margin="10, 0"
+                Padding="10, 0">Change activity</Button>
+
+            <Button Grid.Column="2"
+                Grid.Row="3"
+                VerticalAlignment="Center"
+                Margin="10, 0"
+                Padding="10, 0" Click="Button_Click">back</Button>
+        </Grid>
+    </Grid>
+</Page>

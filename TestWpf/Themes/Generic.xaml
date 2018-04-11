@@ -1,0 +1,115 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:TestWpf.Controls"
+    xmlns:primitives="clr-namespace:TestWpf.Primitives">
+
+    <Style TargetType="{x:Type controls:CalendarLedgerItem}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:CalendarLedgerItem}">
+                    <Border Background="#E3EFFF"
+                            BorderBrush="#6593CF"
+                            BorderThickness="0,0,1,1"
+                            Height="45">
+                        <StackPanel Orientation="Horizontal" 
+                                    VerticalAlignment="Center" 
+                                    HorizontalAlignment="Center">
+                            <TextBlock Text="{TemplateBinding TimeslotA}" 
+                                       Foreground="#9493CF" 
+                                       FontSize="16" 
+                                       Margin="0,3,0,0"/>
+                            <TextBlock Text="{TemplateBinding TimeslotB}" 
+                                       Foreground="#9493CF"  
+                                       Margin="1.5,0,0,0"/>
+                        </StackPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type controls:CalendarLedger}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:CalendarLedger}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <StackPanel>
+                            <controls:CalendarLedgerItem TimeslotA="12" TimeslotB="am" />
+                            <controls:CalendarLedgerItem TimeslotA="1" TimeslotB="00" />
+                            <controls:CalendarLedgerItem TimeslotA="2" TimeslotB="00" />
+                            <controls:CalendarLedgerItem TimeslotA="3" TimeslotB="00" />
+                            <controls:CalendarLedgerItem TimeslotA="4" TimeslotB="00" />
+                            <controls:CalendarLedgerItem TimeslotA="5" TimeslotB="00" />
+                            <controls:CalendarLedgerItem TimeslotA="6" TimeslotB="00" />
+                            <controls:CalendarLedgerItem TimeslotA="7" TimeslotB="00" />
+                            <controls:CalendarLedgerItem TimeslotA="8" TimeslotB="00" />
+                            <controls:CalendarLedgerItem TimeslotA="9" TimeslotB="00" />
+                            <controls:CalendarLedgerItem TimeslotA="10" TimeslotB="00" />
+                            <controls:CalendarLedgerItem TimeslotA="11" TimeslotB="00" />
+                            <controls:CalendarLedgerItem TimeslotA="12" TimeslotB="pm" />
+                            <controls:CalendarLedgerItem TimeslotA="1" TimeslotB="00" />
+                            <controls:CalendarLedgerItem TimeslotA="2" TimeslotB="00" />
+                            <controls:CalendarLedgerItem TimeslotA="3" TimeslotB="00" />
+                            <controls:CalendarLedgerItem TimeslotA="4" TimeslotB="00" />
+                            <controls:CalendarLedgerItem TimeslotA="5" TimeslotB="00" />
+                            <controls:CalendarLedgerItem TimeslotA="6" TimeslotB="00" />
+                            <controls:CalendarLedgerItem TimeslotA="7" TimeslotB="00" />
+                            <controls:CalendarLedgerItem TimeslotA="8" TimeslotB="00" />
+                            <controls:CalendarLedgerItem TimeslotA="9" TimeslotB="00" />
+                            <controls:CalendarLedgerItem TimeslotA="10" TimeslotB="00" />
+                            <controls:CalendarLedgerItem TimeslotA="11" TimeslotB="00" />
+                        </StackPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="{ComponentResourceKey TypeInTargetAssembly={x:Type controls:CalendarView}, ResourceId=DefaultStyleKey}" 
+           TargetType="{x:Type ListView}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListView}">
+                    <Grid ShowGridLines="False">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <ScrollViewer Grid.Row="0"
+                                      Grid.Column="1">
+                            <Grid>
+                                <primitives:DaysOfWeekPresenter IsItemsHost="True" 
+                                                                Height="35" />
+                            </Grid>
+                        </ScrollViewer>
+
+                        <ScrollViewer Grid.Row="1"
+                                      Grid.Column="0"
+                                      Grid.ColumnSpan="2">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <controls:CalendarLedger Grid.Column="0" />
+                                <primitives:CalendarViewContentPresenter Grid.Column="1" 
+                                                                         VerticalAlignment="Top"
+                                                                         Height="1080"
+                                                                         IsItemsHost="True" />
+                            </Grid>
+                        </ScrollViewer>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

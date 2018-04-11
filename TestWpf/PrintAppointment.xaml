@@ -1,0 +1,36 @@
+﻿<Window x:Class="TestWpf.PrintAppointment"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+         DataContext="{Binding AppointmentWindow, Source={StaticResource Locator}}"
+        xmlns:local="clr-namespace:TestWpf"
+        mc:Ignorable="d"
+        Title="PrintAppointment" Height="275.683" Width="300">
+    <Grid>
+        <Grid x:Name="grid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="200" />
+            </Grid.ColumnDefinitions>
+
+
+            <Label Grid.Row="0" Grid.Column="0" Content="ID:"/>
+            <Label Grid.Row="1" Grid.Column="0" Content="Name:"/>
+            <Label Grid.Row="2" Grid.Column="0" Content="DateofTheBeginning:" />
+            <Label x:Name="test" Grid.Column="1" Grid.Row="0" Margin="3" Content="{Binding AppointmentId}" />
+            <Label Grid.Column="1" Grid.Row="1" Margin="3" Content="{Binding AppointmentName}" />
+            <Label Grid.Column="1" Grid.Row="2" Margin="3" Content="{Binding AppointmentBeginDate}" />
+        </Grid>
+       
+        <Button Content="Print" HorizontalAlignment="Left" Margin="101,109,0,-113" Grid.Row="3" VerticalAlignment="Top" Width="86" Grid.ColumnSpan="2" Height="30"  Command="{Binding PrintCommand, Mode=OneTime}" CommandParameter="{Binding ElementName=grid}"/>
+    </Grid>
+        
+</Window>

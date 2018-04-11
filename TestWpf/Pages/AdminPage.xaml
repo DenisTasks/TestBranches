@@ -1,0 +1,23 @@
+﻿<Page x:Class="TestWpf.Pages.AdminPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+       DataContext="{Binding AdminPage, Source={StaticResource Locator}}"
+      xmlns:local="clr-namespace:MVVM"
+      mc:Ignorable="d" 
+      WindowHeight="500" 
+      WindowWidth="850"  
+      Title="Page2">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="159*"/>
+        </Grid.ColumnDefinitions>
+        <Button Content="Show all groups" Grid.Column="1" HorizontalAlignment="Center" Margin="189,53,180,0" VerticalAlignment="Top" Width="108" Height="24"  Click="Button_Click_ToGroups"/>
+        <Button Content="Show logs" Grid.Column="1" HorizontalAlignment="Center" Margin="189,105,180,0" VerticalAlignment="Top" Width="108" Height="24"  Click="Button_Click_ToLogs"/>
+        <Button Content="Show all users" Grid.Column="1" HorizontalAlignment="Center" Margin="189,158,180,0" VerticalAlignment="Top" Width="108" Height="24"  Click="Button_Click_ToUsers"/>
+        <Button Content="Back" Grid.Column="1" HorizontalAlignment="Center" Margin="189,211,180,0" VerticalAlignment="Top" Width="108" Height="24"  Click="Button_Click_GoBack"/>
+    </Grid>
+</Page>

@@ -1,0 +1,200 @@
+﻿<Page x:Class="TestWpf.Pages.MainWindowPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:controls="clr-namespace:TestWpf.Controls"
+      xmlns:local="clr-namespace:TestWpf.Pages" 
+      mc:Ignorable="d"
+      DataContext="{Binding MainWindow,
+                              Source={StaticResource Locator}}"
+      WindowHeight="500" 
+      WindowWidth="850">
+    
+    <Page.Resources>
+        <local:AdminVisibilityConverter x:Key="AdminVisibilityConverter"/>
+    </Page.Resources>
+    
+    <Grid ShowGridLines="False">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.04*"/>
+            <ColumnDefinition Width="0.20*"/>
+            <ColumnDefinition Width="0.15*"/>
+            <ColumnDefinition Width="0.15*"/>
+            <ColumnDefinition Width="0.11*"/>
+            <ColumnDefinition Width="0.05*"/>
+
+            <ColumnDefinition Width="0.15*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="0.9*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Column="0" x:Name="HelperField1"/>
+        <Grid Grid.Column="1" x:Name="HelperField2"/>
+        <Grid Grid.Column="2" x:Name="HelperField3"/>
+        <Grid Grid.Column="3" x:Name="HelperField4"/>
+        <Grid Grid.Column="4" x:Name="HelperField5"/>
+        <Grid Grid.Column="5" x:Name="HelperField6"/>
+
+        <WrapPanel  Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="7"
+                    Orientation="Horizontal"
+                    Margin="3">
+            
+            <Button Command="{Binding AddAppWindowCommand}"
+                    Padding="5"
+                    Margin="2, 3"
+                    Content="New App" />
+
+            <Button Command="{Binding FilterBySubjectCommand}"
+                    CommandParameter="{Binding SelectedItem, ElementName=AppointmentsList}"
+                    Padding="5"
+                    Margin="2, 3"
+                    Content="Filter by" />
+
+            <Button Command="{Binding GroupBySubjectCommand}"
+                    Padding="5"
+                    Margin="2, 3"
+                    Content="Group by"/> 
+
+            <Button Command="{Binding PrintAppointmentCommand}"
+                    CommandParameter="{Binding SelectedItem, ElementName=AppointmentsList}"
+                    Padding="5"
+                    Margin="2, 3"
+                    Content="Print Appointment" />
+
+            <Button Command="{Binding AllAppByLocationCommand}"
+                    CommandParameter="{Binding SelectedItem, ElementName=AppointmentsList}"
+                    Padding="5"
+                    Margin="2, 3"
+                    Content="All App By Location" />
+
+            <Button Command="{Binding PrintTable}"
+                    CommandParameter="{Binding ElementName=AppointmentsList}"
+                    Padding="5"
+                    Margin="2, 3"
+                    Content="Print table" />
+
+            <Button Command="{Binding CalendarFrameCommand}"
+                    Padding="5"
+                    Margin="2, 3"
+                    Content="{Loc MainPageCalendar}" />
+
+            <Button Command="{Binding CreateGroupCommand}"
+                    Padding="5"
+                    Margin="2, 3"
+                    Content="{Loc MainPageCreateGroup}" />
+            
+            <Button Click="ButtonBase_Click_ToAdmin"
+                    Visibility="{Binding Converter={StaticResource AdminVisibilityConverter}}"
+                    Padding="5"
+                    Margin="2, 3"
+                    Content="{Loc AdminButtonContent}" />
+
+            <controls:TestControl x:Name="TestControl" 
+                                  Content="{Binding ElementName=TestControl, Path=CurrentTime}"
+                                  Padding="5"
+                                  Margin="2, 3" />
+
+            <Button Click="ButtonBase_Click_ToLoginPage"
+                    Padding="5"
+                    Margin="2, 3"
+                    Content="Logout" />
+
+            <ComboBox ItemsSource="{Binding Files}"
+                      SelectedItem="{Binding SelectedTheme, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      Padding="5"
+                      Margin="2, 3"/>
+
+            <ComboBox ItemsSource="{Binding Languages}"
+                      SelectedItem="{Binding SelectedLanguage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      Padding="5"
+                      Margin="2, 3"/>
+
+            <Label Padding="5"
+                   Margin="2, 3"
+                   VerticalAlignment="Center"
+                   FontWeight="Bold"
+                   Foreground="OrangeRed"
+                   Content="{Binding CurrentDateTime}"
+                   ContentStringFormat="dddd, MMMM dd, yyyy h:mm:ss tt"/>
+
+        </WrapPanel>
+
+        <ListView Name="AppointmentsList"
+                  Grid.Row="1"
+                  Grid.Column="0"
+                  Grid.ColumnSpan="6"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                  SelectionMode="Single"
+                  ItemsSource="{Binding Appointments}"
+                  ItemContainerStyle="{DynamicResource BaseStyle}">
+            <ListView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="SteelBlue"  BorderThickness="2">
+                                <TextBlock Text="{Binding Name}"
+                                           FontWeight="Bold"
+                                           Foreground="Red"/>
+                            </Border>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </ListView.GroupStyle>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding AppointmentId}"
+                                    Width="{Binding ElementName=HelperField1, Path=ActualWidth}">
+                        <GridViewColumnHeader Content="Id"
+                                              Command="{Binding SortCommand}"
+                                              CommandParameter="AppointmentId"/>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Subject}"
+                                    Width="{Binding ElementName=HelperField2, Path=ActualWidth}">
+                        <GridViewColumnHeader Content="Subject"
+                                              Command="{Binding SortCommand}"
+                                              CommandParameter="Subject"/>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding BeginningDate}"
+                                    Width="{Binding ElementName=HelperField3, Path=ActualWidth}">
+                        <GridViewColumnHeader Content="Beginning Date"
+                                              Command="{Binding SortCommand}"
+                                              CommandParameter="BeginningDate"/>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding EndingDate}"
+                                    Width="{Binding ElementName=HelperField4, Path=ActualWidth}">
+                        <GridViewColumnHeader Content="Ending Date"
+                                              Command="{Binding SortCommand}"
+                                              CommandParameter="EndingDate"/>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Room}"
+                                    Width="{Binding ElementName=HelperField5, Path=ActualWidth}">
+                        <GridViewColumnHeader Content="Location"
+                                              Command="{Binding SortCommand}"
+                                              CommandParameter="LocationId"/>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Users.Count}"
+                                    Width="{Binding ElementName=HelperField6, Path=ActualWidth}">
+                        <GridViewColumnHeader Content="Users"
+                                              Command="{Binding SortCommand}"
+                                              CommandParameter="Users.Count"/>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <ListView Grid.Column="6"
+                  Grid.Row="1"
+                  VerticalContentAlignment="Stretch"
+                  ItemsSource="{Binding Appointments}"
+                  ItemContainerStyle="{DynamicResource MainWindowRemoveStyle}">
+        </ListView>
+
+        <controls:ToastList Grid.Row="1" 
+                         Grid.Column="3" 
+                         VerticalAlignment="Top" />
+    </Grid>
+</Page>

@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C92373EA-87AC-443A-A307-207F5A7FF9CF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Model</RootNamespace>
+    <AssemblyName>Model</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.SqlClient, Version=4.2.0.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SqlClient.4.4.3\lib\net461\System.Data.SqlClient.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Entities\Appointment.cs" />
+    <Compile Include="Entities\Group.cs" />
+    <Compile Include="Entities\Location.cs" />
+    <Compile Include="Entities\Log.cs" />
+    <Compile Include="Entities\Notification.cs" />
+    <Compile Include="Entities\Role.cs" />
+    <Compile Include="Entities\User.cs" />
+    <Compile Include="Helpers\EncryptionHelpers.cs" />
+    <Compile Include="Interfaces\IGenericRepository.cs" />
+    <Compile Include="Migrations\201803011157343_InitialCreate.cs" />
+    <Compile Include="Migrations\201803011157343_InitialCreate.Designer.cs">
+      <DependentUpon>201803011157343_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803020933233_AddGroupMigration.cs" />
+    <Compile Include="Migrations\201803020933233_AddGroupMigration.Designer.cs">
+      <DependentUpon>201803020933233_AddGroupMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803061344393_LogCreation.cs" />
+    <Compile Include="Migrations\201803061344393_LogCreation.Designer.cs">
+      <DependentUpon>201803061344393_LogCreation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803061407542_AlerLog.cs" />
+    <Compile Include="Migrations\201803061407542_AlerLog.Designer.cs">
+      <DependentUpon>201803061407542_AlerLog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803140926026_ChangedUserModel.cs" />
+    <Compile Include="Migrations\201803140926026_ChangedUserModel.Designer.cs">
+      <DependentUpon>201803140926026_ChangedUserModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803211203597_update passwords.cs" />
+    <Compile Include="Migrations\201803211203597_update passwords.Designer.cs">
+      <DependentUpon>201803211203597_update passwords.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803231010029_NotifyAdded.cs" />
+    <Compile Include="Migrations\201803231010029_NotifyAdded.Designer.cs">
+      <DependentUpon>201803231010029_NotifyAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="ModelService\GenericRepository.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WPFOutlookContext.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201803011157343_InitialCreate.resx">
+      <DependentUpon>201803011157343_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803020933233_AddGroupMigration.resx">
+      <DependentUpon>201803020933233_AddGroupMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803061344393_LogCreation.resx">
+      <DependentUpon>201803061344393_LogCreation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803061407542_AlerLog.resx">
+      <DependentUpon>201803061407542_AlerLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803140926026_ChangedUserModel.resx">
+      <DependentUpon>201803140926026_ChangedUserModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803211203597_update passwords.resx">
+      <DependentUpon>201803211203597_update passwords.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803231010029_NotifyAdded.resx">
+      <DependentUpon>201803231010029_NotifyAdded.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
