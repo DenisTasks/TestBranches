@@ -24,7 +24,7 @@ namespace BLL.BLLService
         public BLLServiceMain(IGenericRepository<Appointment> appointments, IGenericRepository<User> users, IGenericRepository<Location> locations, WPFOutlookContext context)
         {
             //111
-            //
+            //222
             //
             //
             //
