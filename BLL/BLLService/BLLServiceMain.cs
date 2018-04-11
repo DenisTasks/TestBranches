@@ -16,7 +16,7 @@ namespace BLL.BLLService
 {
     public class BLLServiceMain : IBLLServiceMain
     {
-        private readonly WPFOutlookContext _cont;
+        private readonly WPFOutlookContext _cont11111111;
         private readonly IGenericRepository<Appointment> _appointments;
         private readonly IGenericRepository<User> _users;
         private readonly IGenericRepository<Location> _locations;
@@ -37,7 +37,7 @@ namespace BLL.BLLService
             _appointments = appointments;
             _users = users;
             _locations = locations;
-            _cont = context;
+            _cont11111111 = context;
         }
 
         public IEnumerable<AppointmentDTO> GetAppointmentsByUserId(int id)
@@ -63,7 +63,7 @@ namespace BLL.BLLService
             List<Appointment> collection;
             using (new WPFOutlookContext())
             {
-                collection = _cont.Database.SqlQuery<Appointment>("GetApps").ToList();
+                collection = _cont11111111.Database.SqlQuery<Appointment>("GetApps").ToList();
             }
             var mappingCollection = Mapper.Map<IEnumerable<Appointment>, IEnumerable<AppointmentDTO>>(collection).ToList();
             foreach (var item in mappingCollection)
@@ -253,7 +253,7 @@ namespace BLL.BLLService
 
             using (new WPFOutlookContext())
             {
-                _cont.Database.ExecuteSqlCommand("OverlappingDates @beginningDate, @endingDate, @locationId, @returnCode OUTPUT", param1, param2, param3, returnCode);
+                _cont11111111.Database.ExecuteSqlCommand("OverlappingDates @beginningDate, @endingDate, @locationId, @returnCode OUTPUT", param1, param2, param3, returnCode);
                 var returnCodeValue = (int)returnCode.Value;
                 return returnCodeValue;
             }
@@ -268,7 +268,7 @@ namespace BLL.BLLService
             List<Appointment> result;
             using (new WPFOutlookContext())
             {
-                result = _cont.Database.SqlQuery<Appointment>("TestDates @beginningDate, @endingDate, @locationId", param1, param2, param3).ToList();
+                result = _cont11111111.Database.SqlQuery<Appointment>("TestDates @beginningDate, @endingDate, @locationId", param1, param2, param3).ToList();
             }
 
             return result.Count;
