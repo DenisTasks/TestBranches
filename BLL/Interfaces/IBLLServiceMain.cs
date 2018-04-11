@@ -17,6 +17,6 @@ namespace BLL.Interfaces
         void RemoveFromAppointment(int appointmentId, int userId);
         int OverlappingDates(DateTime beginningDate, DateTime endingDate, int locationId);
         int CheckOverlappingDates(DateTime beginningDate, DateTime endingDate, int locationId);
-        IEnumerable<AppointmentDTO> GetAppointmentsByUserIdSql();
+        IEnumerable<AppointmentDTO> GetAppointmentsByUserIdSql(int id);
     }
 }

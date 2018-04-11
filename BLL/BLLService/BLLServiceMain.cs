@@ -16,28 +16,17 @@ namespace BLL.BLLService
 {
     public class BLLServiceMain : IBLLServiceMain
     {
-        private readonly WPFOutlookContext _cont11111111;
+        private readonly WPFOutlookContext _context;
         private readonly IGenericRepository<Appointment> _appointments;
         private readonly IGenericRepository<User> _users;
         private readonly IGenericRepository<Location> _locations;
 
         public BLLServiceMain(IGenericRepository<Appointment> appointments, IGenericRepository<User> users, IGenericRepository<Location> locations, WPFOutlookContext context)
         {
-            //111
-            //222
-            //333
-            //444
-            //555
-            //666
-            //777dev
-            //888dem
-            //
-            //
-            //
             _appointments = appointments;
             _users = users;
             _locations = locations;
-            _cont11111111 = context;
+            _context = context;
         }
 
         public IEnumerable<AppointmentDTO> GetAppointmentsByUserId(int id)
@@ -58,12 +47,13 @@ namespace BLL.BLLService
             return mappingCollection;
         }
 
-        public IEnumerable<AppointmentDTO> GetAppointmentsByUserIdSql()
+        public IEnumerable<AppointmentDTO> GetAppointmentsByUserIdSql(int id)
         {
             List<Appointment> collection;
+            var p1 = new SqlParameter("@p1", id);
             using (new WPFOutlookContext())
             {
-                collection = _cont11111111.Database.SqlQuery<Appointment>("GetApps").ToList();
+                collection = _context.Database.SqlQuery<Appointment>("GetAppsById @p1", p1).ToList();
             }
             var mappingCollection = Mapper.Map<IEnumerable<Appointment>, IEnumerable<AppointmentDTO>>(collection).ToList();
             foreach (var item in mappingCollection)
@@ -253,7 +243,7 @@ namespace BLL.BLLService
 
             using (new WPFOutlookContext())
             {
-                _cont11111111.Database.ExecuteSqlCommand("OverlappingDates @beginningDate, @endingDate, @locationId, @returnCode OUTPUT", param1, param2, param3, returnCode);
+                _context.Database.ExecuteSqlCommand("OverlappingDates @beginningDate, @endingDate, @locationId, @returnCode OUTPUT", param1, param2, param3, returnCode);
                 var returnCodeValue = (int)returnCode.Value;
                 return returnCodeValue;
             }
@@ -268,7 +258,7 @@ namespace BLL.BLLService
             List<Appointment> result;
             using (new WPFOutlookContext())
             {
-                result = _cont11111111.Database.SqlQuery<Appointment>("TestDates @beginningDate, @endingDate, @locationId", param1, param2, param3).ToList();
+                result = _context.Database.SqlQuery<Appointment>("TestDates @beginningDate, @endingDate, @locationId", param1, param2, param3).ToList();
             }
 
             return result.Count;
